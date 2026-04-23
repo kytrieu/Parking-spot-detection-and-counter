@@ -3,13 +3,13 @@ import numpy as np
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-from util import get_parking_spots_bboxes, empty_or_not
+from utils import get_parking_spots_bboxes, empty_or_not
 
 def calc_diff(im1, im2):
     return np.abs(np.mean(im1) - np.mean(im2))
 
-mask = "mask/mask_crop.png"
-video_path = "data/parking_1920_1080_loop.mp4"
+mask = "mask/mask_1920_1080.png"
+video_path = "data/parking_1920_1080.mp4"
 
 mask = cv2.imread(mask, 0)
 
@@ -30,12 +30,6 @@ while True:
     ret, frame = cap.read()
 
     if not ret:
-        break
-    if frame_number == 0:
-        for spot_idx, spot in enumerate(spots):
-            x1, y1, w, h = spot
-            print(f"weidht: {w}, height: {h}")
-            break
         break
     if frame_number % step == 0 and previous_frame is not None:
         for spot_idx, spot in enumerate(spots):
